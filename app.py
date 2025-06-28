@@ -4,12 +4,12 @@ import joblib
 
 # Judul aplikasi
 st.title("🔍 Prediksi Kunjungan Ulang Pasien (30 Hari)")
-st.markdown("Upload data pasien dan lihat apakah akan kembali dalam 30 hari ke depan berdasarkan model Random Forest (`rf4.pkl`).")
+st.markdown("Upload data pasien dan lihat apakah akan kembali dalam 30 hari ke depan berdasarkan model Random Forest (`rf5.pkl`).")
 
 # Load model
 @st.cache_resource
 def load_model():
-    return joblib.load("rf4.pkl")
+    return joblib.load("rf5.pkl")
 
 model = load_model()
 
