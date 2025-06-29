@@ -28,6 +28,13 @@ if uploaded_file:
     df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
     df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
+    # Sortir berdasarkan MRN dan tanggal
+    df.sort_values(['MRN', 'ADMISSION_DATE'], inplace=True)
+
+    # Buat kolom target: apakah akan berkunjung lagi dalam 30 hari
+    df['next_visit'] = df.groupby('MRN')['ADMISSION_DATE'].shift(-1)
+    df['days_to_next'] = (df['next_visit'] - df['ADMISSION_DATE']).dt.days
+    df['kunjungan_30_hari'] = df['days_to_next'].apply(lambda x: 1 if 0 < x <= 30 else 0)
 
     fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
     target = df['kunjungan_30_hari']
