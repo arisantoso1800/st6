@@ -22,7 +22,7 @@ if uploaded_file:
 
     # Tampilkan preview
     st.subheader("🧾 Data yang di-upload")
-    st.write(df.head())
+    # st.write(df.head())
 
     # Preprocessing (pastikan kolom seperti saat training)
     df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
@@ -30,6 +30,7 @@ if uploaded_file:
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
     # Sortir berdasarkan MRN dan tanggal
     df.sort_values(['MRN', 'ADMISSION_DATE'], inplace=True)
+    st.write(df.head())
 
     # Buat kolom target: apakah akan berkunjung lagi dalam 30 hari
     df['next_visit'] = df.groupby('MRN')['ADMISSION_DATE'].shift(-1)
@@ -49,15 +50,15 @@ if uploaded_file:
     fitur_encoded = fitur_encoded[model_columns]
 
     # Prediksi
-    prediksi = model.predict(fitur_encoded)
-    df['prediksi_kunjungan'] = prediksi
+    # prediksi = model.predict(fitur_encoded)
+    # df['prediksi_kunjungan'] = prediksi
 
     # Tampilkan hasil
-    st.subheader("✅ Hasil Prediksi")
-    hasil = df[df['prediksi_kunjungan'] == 1][['MRN', 'NAMA_PASIEN', 'DPJP_CLEAN', 'ADMISSION_DATE']]
-    st.write(hasil)
+    # st.subheader("✅ Hasil Prediksi")
+    # hasil = df[df['prediksi_kunjungan'] == 1][['MRN', 'NAMA_PASIEN', 'DPJP_CLEAN', 'ADMISSION_DATE']]
+    # st.write(hasil)
 
     # Unduh hasil
-    hasil_csv = hasil.to_csv(index=False).encode('utf-8')
-    st.download_button("⬇️ Download Hasil Prediksi", hasil_csv, "hasil_prediksi.csv", "text/csv")
+    # hasil_csv = hasil.to_csv(index=False).encode('utf-8')
+    # st.download_button("⬇️ Download Hasil Prediksi", hasil_csv, "hasil_prediksi.csv", "text/csv")
 
