@@ -25,21 +25,21 @@ if uploaded_file:
     st.write(df.head())
 
     # Preprocessing (pastikan kolom seperti saat training)
-    # df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
-    # df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
-    # df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
+    df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
+    df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
+    df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
 
     # Buat kolom target: apakah akan berkunjung lagi dalam 30 hari
-    # df['next_visit'] = df.groupby('MRN')['ADMISSION_DATE'].shift(-1)
-    # df['days_to_next'] = (df['next_visit'] - df['ADMISSION_DATE']).dt.days
-    # df['kunjungan_30_hari'] = df['days_to_next'].apply(lambda x: 1 if 0 < x <= 30 else 0)
+    df['next_visit'] = df.groupby('MRN')['ADMISSION_DATE'].shift(-1)
+    df['days_to_next'] = (df['next_visit'] - df['ADMISSION_DATE']).dt.days
+    df['kunjungan_30_hari'] = df['days_to_next'].apply(lambda x: 1 if 0 < x <= 30 else 0)
 
     # st.write(df.head())
 
-    # fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
-    # target = df['kunjungan_30_hari']
+    fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
+    target = df['kunjungan_30_hari']
     # One-hot encoding
-    # fitur_encoded = pd.get_dummies(fitur.astype(str))
+    fitur_encoded = pd.get_dummies(fitur.astype(str))
 
     # Sesuaikan kolom agar match dengan model
     # model_columns = model.feature_names_in_
@@ -49,7 +49,7 @@ if uploaded_file:
     # fitur_encoded = fitur_encoded[model_columns]
 
     # Prediksi
-    prediksi = model.predict(df)
+    prediksi = model.predict(fitur_encoded)
     df['prediksi_kunjungan'] = prediksi
 
     # Tampilkan hasil
