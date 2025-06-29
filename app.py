@@ -30,6 +30,7 @@ if uploaded_file:
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
 
     fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
+    target = df['kunjungan_30_hari']
     # One-hot encoding
     fitur_encoded = pd.get_dummies(fitur.astype(str))
 
