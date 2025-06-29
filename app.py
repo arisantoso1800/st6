@@ -9,7 +9,7 @@ st.markdown("Upload data pasien dan lihat apakah akan kembali dalam 30 hari ke d
 # Load model
 @st.cache_resource
 def load_model():
-    return joblib.load("rf6.pkl")
+    return joblib.load("rf7.pkl")
 
 model = load_model()
 
