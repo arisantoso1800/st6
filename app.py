@@ -31,7 +31,7 @@ if uploaded_file:
 
     fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
     # One-hot encoding
-    # fitur_encoded = pd.get_dummies(fitur.astype(str))
+    fitur_encoded = pd.get_dummies(fitur.astype(str))
 
     # Sesuaikan kolom agar match dengan model
     model_columns = model.feature_names_in_
