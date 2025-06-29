@@ -7,11 +7,11 @@ st.title("🔍 Prediksi Kunjungan Ulang Pasien (30 Hari)")
 st.markdown("Upload data pasien dan lihat apakah akan kembali dalam 30 hari ke depan berdasarkan model Random Forest (`rf7.pkl`).")
 
 # Load model
-@st.cache_resource
-def load_model():
-    return joblib.load("rf7.pkl")
+# @st.cache_resource
+# def load_model():
+#     return joblib.load("rf7.pkl")
 
-model = load_model()
+model = joblib.load('rf7.pkl')
 
 # Upload file
 uploaded_file = st.file_uploader("📁 Upload file data pasien (.csv)", type=["csv"])
