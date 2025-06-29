@@ -25,7 +25,7 @@ if uploaded_file:
     # st.write(df.head())
 
     # Preprocessing (pastikan kolom seperti saat training)
-    df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
+    # df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
     df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
     # Sortir berdasarkan MRN dan tanggal
@@ -43,11 +43,11 @@ if uploaded_file:
     fitur_encoded = pd.get_dummies(fitur.astype(str))
 
     # Sesuaikan kolom agar match dengan model
-    model_columns = model.feature_names_in_
-    for col in model_columns:
-        if col not in fitur_encoded.columns:
-            fitur_encoded[col] = 0
-    fitur_encoded = fitur_encoded[model_columns]
+    # model_columns = model.feature_names_in_
+    # for col in model_columns:
+    #     if col not in fitur_encoded.columns:
+    #         fitur_encoded[col] = 0
+    # fitur_encoded = fitur_encoded[model_columns]
 
     # Prediksi
     # prediksi = model.predict(fitur_encoded)
