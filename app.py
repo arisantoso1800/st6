@@ -25,7 +25,7 @@ if uploaded_file:
     # st.write(df.head())
 
     # Preprocessing (pastikan kolom seperti saat training)
-    # df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
+    df['ADMISSION_DATE'] = pd.to_datetime(df['ADMISSION_DATE'], format='%d%m%Y', errors='coerce')
     df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
     # Sortir berdasarkan MRN dan tanggal
