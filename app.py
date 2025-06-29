@@ -29,8 +29,9 @@ if uploaded_file:
     df['ADMISSION_DAY'] = df['ADMISSION_DATE'].dt.dayofweek
     df['ADMISSION_MONTH'] = df['ADMISSION_DATE'].dt.month
 
-    fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']].astype(str)
-    fitur_encoded = pd.get_dummies(fitur)
+    fitur = df[['MRN', 'DPJP_CLEAN', 'ADMISSION_DAY', 'ADMISSION_MONTH']]
+    # One-hot encoding
+    # fitur_encoded = pd.get_dummies(fitur.astype(str))
 
     # Sesuaikan kolom agar match dengan model
     model_columns = model.feature_names_in_
